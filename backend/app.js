@@ -1,17 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const helmet = require('helmet');
+require('dotenv').config();
 
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 
-const app = express();
 
-mongoose.connect('mongodb+srv://Val:12345678aA@cluster0.esmm4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+
+mongoose.connect(process.env.MONGODB_ACCES,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+const app = express();
+
+app.use(helmet());
 
 app.use(express.json());
 

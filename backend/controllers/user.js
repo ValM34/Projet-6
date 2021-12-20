@@ -32,7 +32,7 @@ exports.login = (req, res, next) => {
             userId: user._id,
             token: jwt.sign( // On va encoder le userId et le token grâce à la fonction sign de jsonwebtoken
               { userId: user._id }, // On encode le userId car ça nous permet de savoir qui a modifié/créé quoi dans l'application. Pour donner des accès différents aux utilisateurs.
-              'RANDOM_TOKEN_SECRET', // C'est la clef pour déchiffrer le token
+              process.env.TOKEN, // C'est la clef pour déchiffrer le token
               { expiresIn: '1000h' }
             )
           }); // Le token a donc été renvoyé à l'utilisateur.

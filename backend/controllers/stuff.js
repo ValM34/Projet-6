@@ -81,9 +81,7 @@ exports.getAllSauces = (req, res, next) => {
 
 exports.likeOneSauce = (req, res, next) => {
 
-  console.log(req.body);
-  console.log(req.body.userId);
-  console.log(req.params.id);
+  
 
   if (req.body.like === 1) {
     Sauce.updateOne({ _id: req.params.id }, { $push: { usersLiked: req.body.userId }, $inc: { likes: +1 } })
@@ -96,7 +94,6 @@ exports.likeOneSauce = (req, res, next) => {
   } else if (req.body.like === 0) {
     Sauce.findOne({ _id: req.params.id })
       .then((sauce) => {
-        console.log(sauce);
         if (sauce.usersLiked.includes(req.body.userId)) {
           Sauce.updateOne({ _id: req.params.id }, { $pull: { usersLiked: req.body.userId }, $inc: { likes: -1 } })
             .then(() => res.status(200).json({ message: 'Like ajouté !' }))
