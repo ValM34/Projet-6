@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router(); // Je n'ai pas vraiment compris l'utilité de express.Router
+const router = express.Router(); 
 
 const sauceCtrl = require('../controllers/stuff');
 const auth = require('../middleware/auth');
